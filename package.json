@@ -1,0 +1,41 @@
+{
+  "name": "boilerplate-playwright-js",
+  "version": "1.0.0",
+  "description": "Comprehensive Playwright E2E Testing Boilerplate with Page Object Model, Multi-environment Config, Docker, GitHub Actions, and Allure Reporting",
+  "author": "Your Team",
+  "license": "MIT",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:regression": "playwright test --grep @regression",
+    "test:critical": "playwright test --grep @critical",
+    "test:dev": "cross-env ENV=dev playwright test",
+    "test:staging": "cross-env ENV=staging playwright test",
+    "test:prod": "cross-env ENV=prod playwright test",
+    "test:parallel": "playwright test --workers=4",
+    "test:serial": "playwright test --workers=1",
+    "test:single": "playwright test tests/e2e/login.spec.js",
+    "report:allure": "allure generate allure-results --clean -o allure-report",
+    "report:open": "allure open allure-report",
+    "report:clear": "rm -rf allure-results allure-report",
+    "lint": "eslint tests/ --fix",
+    "format": "prettier --write \"tests/**/*.js\"",
+    "install:browsers": "playwright install",
+    "pretest": "npm run lint",
+    "clean": "rm -rf allure-results allure-report .auth results"
+  },
+  "dependencies": {
+    "@playwright/test": "^1.48.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0",
+    "allure-playwright": "^2.13.1",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.5",
+    "eslint": "^8.57.0",
+    "prettier": "^3.3.2"
+  }
+}

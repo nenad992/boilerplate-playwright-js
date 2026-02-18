@@ -1,0 +1,42 @@
+{
+  "users": {
+    "validUser": {
+      "username": "practice",
+      "password": "SuperSecurePassword!",
+      "firstName": "Practice",
+      "lastName": "User",
+      "email": "practice@expandtesting.com"
+    },
+    "testUser": {
+      "username": "testuser",
+      "password": "TestPassword123!",
+      "firstName": "Test",
+      "lastName": "User"
+    }
+  },
+  "invalidCredentials": {
+    "wrongPassword": {
+      "username": "practice",
+      "password": "WrongPassword123!"
+    },
+    "nonExistentUser": {
+      "username": "nonexistentuser",
+      "password": "AnyPassword123!"
+    },
+    "emptyUsername": {
+      "username": "",
+      "password": "SuperSecurePassword!"
+    },
+    "emptyPassword": {
+      "username": "practice",
+      "password": ""
+    }
+  },
+  "testData": {
+    "messages": {
+      "loginSuccess": "Practice User",
+      "loginError": "Invalid username or password",
+      "requiredField": "This field is required"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+# Docker configuration files for playwright testing
+
+## Dockerfile
+# Base image: playwright:v1.48.0-jammy
+# Installs dependencies and Playwright browsers
+# Default command: npm run test
+# Environment variables:
+#   - ENV: Set target environment (dev/staging/prod)
+#   - CI: Set to true for CI environments
+#   - HEADLESS: Set to true for headless mode
+
+## Docker Compose
+# Services:
+#   1. playwright: Main test runner container
+#   2. allure: Allure reporting dashboard (optional)
+#
+# Usage:
+#   Docker:
+#     docker build -t playwright-boilerplate .
+#     docker run --rm playwright-boilerplate
+#     docker run --rm -e ENV=staging playwright-boilerplate npm run test:staging
+#
+#   Docker Compose:
+#     docker-compose up --build
+#     docker-compose run --rm playwright npm run test:smoke
+#     docker-compose down
+#
+# Network: playwright-network
+# Ports exposed:
+#   - 4040: Allure server port
+#   - 4050: Allure historical reports port

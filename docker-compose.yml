@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  playwright:
+    build: .
+    container_name: playwright-tests
+    environment:
+      - ENV=dev
+      - CI=true
+      - HEADLESS=true
+    volumes:
+      - ./allure-results:/app/allure-results
+      - ./test-results:/app/test-results
+    command: npm run test
+    networks:
+      - playwright-network
+
+  # Optional: Allure reporting service
+  allure:
+    image: frankescobar/allure-docker-service:2.21.0
+    container_name: allure-server
+    ports:
+      - '4040:4040'
+      - '4050:4050'
+    volumes:
+      - ./allure-results:/app/allure-results
+      - ./allure-reports:/app/default-reports
+    environment:
+      - CHECK_RESULTS_EVERY_SECONDS=5
+      - KEEP_HISTORY=1
+    networks:
+      - playwright-network
+    depends_on:
+      - playwright
+
+networks:
+  playwright-network:
+    driver: bridge

@@ -2,8 +2,8 @@
  * Staging Environment Configuration
  */
 module.exports = {
-  baseUrl: 'https://staging.example.com',
-  apiUrl: 'https://staging.example.com/api',
+  baseUrl: 'https://www.saucedemo.com',
+  apiUrl: '',
   extraHTTPHeaders: {
     'Accept-Language': 'en-US,en;q=0.9',
   },

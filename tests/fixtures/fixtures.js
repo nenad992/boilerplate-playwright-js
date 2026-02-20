@@ -30,16 +30,16 @@ const test = baseTest.extend({
 
   /**
    * Authenticated user fixture
-   * Logs in a user before each test
+   * Logs in a user before each test (Saucedemo)
    * Usage in test: async ({ authenticatedPage }) => { ... }
    */
   authenticatedPage: async ({ page }, use) => {
     const loginPage = new LoginPage(page);
     await loginPage.goto();
-    await loginPage.login('practice', 'SuperSecurePassword!');
+    await loginPage.login('standard_user', 'secret_sauce');
 
-    // Wait for redirect to home page
-    await page.waitForURL('**/dashboard');
+    // Wait for inventory list to appear (Saucedemo dashboard)
+    await page.waitForSelector('.inventory_list', { timeout: 10000 });
 
     await use(page);
   },

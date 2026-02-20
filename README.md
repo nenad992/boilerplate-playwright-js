@@ -149,8 +149,11 @@ npm run test:smoke
 ### 5. View Results
 
 ```bash
-# HTML report
-open test-results/html/index.html
+# Open Playwright HTML report (opens local server on alternate port)
+npm run report:show
+
+# Or open the HTML file directly
+open playwright-report/index.html
 
 # Or generate Allure report
 npm run report:allure
@@ -495,8 +498,15 @@ Built-in Playwright HTML reports:
 
 ```bash
 npm test
-open test-results/html/index.html
+
+# Open the report on a non-conflicting port
+npm run report:show
+
+# Or open the HTML file directly
+open playwright-report/index.html
 ```
+
+**Note**: The `report:show` script uses port 9324 to avoid EADDRINUSE errors if other services are using the default port.
 
 ### Allure Reporting
 
@@ -527,7 +537,7 @@ The HTML report includes:
 
 Reports are generated in:
 
-- **HTML**: `test-results/html/`
+- **HTML**: `playwright-report/`
 - **Allure Results**: `allure-results/`
 - **Allure Report**: `allure-report/`
 - **JSON**: `test-results/results.json`
@@ -733,6 +743,18 @@ test.describe('Feature Name', () => {
 ```
 
 ## 🐛 Troubleshooting
+
+### Seeing Skipped Tests in Reports
+
+If you see multiple skipped tests (e.g., 5 skipped tests when running 5 projects):
+
+**Cause**: Some tests may use `test.skip()` for features not available in the test environment (e.g., Saucedemo doesn't have certain UI elements). This results in 1 skipped test multiplied by the number of projects.
+
+**Solution**: This is expected behavior. If you want to avoid this:
+
+- Remove `test.skip()` from tests that should run
+- Use runtime guards instead: `test.skip(condition, 'reason')`
+- Reduce the number of projects in `playwright.config.js`
 
 ### Tests Fail Locally But Pass on CI
 

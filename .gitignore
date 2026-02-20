@@ -10,3 +10,5 @@ allure-report/
 dist/
 build/
 coverage/
+playwright-report/
+.vscode/

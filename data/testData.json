@@ -1,22 +1,38 @@
 {
   "users": {
     "validUser": {
-      "username": "practice",
-      "password": "SuperSecurePassword!",
-      "firstName": "Practice",
+      "username": "standard_user",
+      "password": "secret_sauce",
+      "firstName": "Standard",
       "lastName": "User",
-      "email": "practice@expandtesting.com"
+      "email": "standard@saucedemo.com"
     },
     "testUser": {
-      "username": "testuser",
-      "password": "TestPassword123!",
+      "username": "standard_user",
+      "password": "secret_sauce",
       "firstName": "Test",
+      "lastName": "User"
+    },
+    "problemUser": {
+      "username": "problem_user",
+      "password": "secret_sauce",
+      "firstName": "Problem",
+      "lastName": "User"
+    },
+    "performanceUser": {
+      "username": "performance_glitch_user",
+      "password": "secret_sauce",
+      "firstName": "Performance",
       "lastName": "User"
     }
   },
   "invalidCredentials": {
+    "lockedUser": {
+      "username": "locked_out_user",
+      "password": "secret_sauce"
+    },
     "wrongPassword": {
-      "username": "practice",
+      "username": "standard_user",
       "password": "WrongPassword123!"
     },
     "nonExistentUser": {
@@ -25,18 +41,29 @@
     },
     "emptyUsername": {
       "username": "",
-      "password": "SuperSecurePassword!"
+      "password": "secret_sauce"
     },
     "emptyPassword": {
-      "username": "practice",
+      "username": "standard_user",
       "password": ""
     }
   },
   "testData": {
     "messages": {
-      "loginSuccess": "Practice User",
-      "loginError": "Invalid username or password",
-      "requiredField": "This field is required"
+      "loginSuccess": "Products",
+      "loginError": "Epic sadface: Username and password do not match any user in this service",
+      "lockedOutError": "Epic sadface: Sorry, this user has been locked out.",
+      "requiredUsername": "Epic sadface: Username is required",
+      "requiredPassword": "Epic sadface: Password is required"
+    },
+    "selectors": {
+      "username": "#user-name",
+      "password": "#password",
+      "loginButton": "#login-button",
+      "dashboard": ".inventory_list",
+      "menuButton": "#react-burger-menu-btn",
+      "logoutButton": "#logout_sidebar_link",
+      "errorMessage": "[data-test='error']"
     }
   }
 }

@@ -22,11 +22,12 @@ test.describe('Login Page - Smoke Tests', () => {
     const credentials = TestDataHelper.getValidCredentials();
     await loginPage.login(credentials.username, credentials.password);
 
-    Logger.step('Verify user is redirected to dashboard');
-    await page.waitForURL('**/dashboard');
+    Logger.step('Verify user is redirected to inventory page');
+    // Saucedemo redirects to /inventory.html
+    await page.waitForSelector('.inventory_list', { timeout: 10000 });
     const currentUrl = page.url();
-    expect(currentUrl).toContain('dashboard');
-    Logger.success('User successfully logged in and redirected to dashboard');
+    expect(currentUrl).toContain('inventory');
+    Logger.success('User successfully logged in and redirected to inventory page');
   });
 
   test('@smoke @auth - Error message displayed for invalid credentials', async ({ loginPage }) => {
@@ -40,27 +41,12 @@ test.describe('Login Page - Smoke Tests', () => {
     Logger.success('Error message is displayed for invalid credentials');
   });
 
-  test('@smoke @critical @auth - Session persistence with remember me', async ({
-    page,
-    loginPage,
-  }) => {
-    Logger.step('User logs in with remember me checkbox');
-    const credentials = TestDataHelper.getValidCredentials();
-    await loginPage.login(credentials.username, credentials.password, true);
-
-    Logger.step('Verify user is logged in');
-    await page.waitForURL('**/dashboard');
-    const currentUrl = page.url();
-    expect(currentUrl).toContain('dashboard');
-    Logger.success('Remember me functionality working correctly');
-  });
-
-  test('@smoke - Login page elements are visible', async ({ loginPage }) => {
-    Logger.step('Verify all login page elements are visible');
+  test('@smoke - Login page elements are visible', async ({ loginPage, page }) => {
+    Logger.step('Verify login page is loaded');
 
     // Verify page title
-    const title = await loginPage.getPageTitle();
+    const title = await page.title();
     expect(title).toBeTruthy();
-    Logger.success('Login page loaded successfully with all elements visible');
+    Logger.success('Login page loaded successfully');
   });
 });

@@ -2,8 +2,8 @@
  * Development Environment Configuration
  */
 module.exports = {
-  baseUrl: 'https://practice.expandtesting.com',
-  apiUrl: 'https://practice.expandtesting.com/api',
+  baseUrl: 'https://www.saucedemo.com',
+  apiUrl: '',
   extraHTTPHeaders: {
     'Accept-Language': 'en-US,en;q=0.9',
   },

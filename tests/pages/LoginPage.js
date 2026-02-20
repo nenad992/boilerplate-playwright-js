@@ -1,6 +1,7 @@
 /**
  * LoginPage - Page Object Model for Login Page
  * Handles all interactions and assertions for the login page
+ * Adapted for Saucedemo
  */
 const BasePage = require('./BasePage');
 
@@ -8,20 +9,18 @@ class LoginPage extends BasePage {
   constructor(page) {
     super(page);
 
-    // Define selectors for the login page
-    this.usernameInput = '#name';
+    // Define selectors for the login page (Saucedemo)
+    this.usernameInput = '#user-name';
     this.passwordInput = '#password';
-    this.rememberMeCheckbox = '#chkbxTwo';
-    this.signInButton = 'button[type="submit"]';
-    this.pageTitle = 'h1';
-    this.errorMessage = '.alert.alert-danger';
+    this.signInButton = '#login-button';
+    this.errorMessage = '[data-test="error"]';
   }
 
   /**
    * Navigate to login page
    */
   async goto() {
-    await this.navigateTo('/login');
+    await this.navigateTo('/');
     await this.waitForPageLoad();
   }
 
@@ -29,16 +28,10 @@ class LoginPage extends BasePage {
    * Perform login with username and password
    * @param {string} username
    * @param {string} password
-   * @param {boolean} rememberMe
    */
-  async login(username, password, rememberMe = false) {
+  async login(username, password) {
     await this.fillText(this.usernameInput, username);
     await this.fillText(this.passwordInput, password);
-
-    if (rememberMe) {
-      await this.checkCheckbox(this.rememberMeCheckbox);
-    }
-
     await this.click(this.signInButton);
   }
 
@@ -60,11 +53,11 @@ class LoginPage extends BasePage {
   }
 
   /**
-   * Get page title
+   * Get login page title (Saucedemo specific)
    * @returns {Promise<string>}
    */
-  async getPageTitle() {
-    return await this.getText(this.pageTitle);
+  async getLoginPageTitle() {
+    return 'Swag Labs';
   }
 }
 

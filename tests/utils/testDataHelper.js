@@ -5,13 +5,13 @@
 
 class TestDataHelper {
   /**
-   * Get valid login credentials
+   * Get valid login credentials (Saucedemo)
    * @returns {object}
    */
   static getValidCredentials() {
     return {
-      username: 'practice',
-      password: 'SuperSecurePassword!',
+      username: 'standard_user',
+      password: 'secret_sauce',
     };
   }
 

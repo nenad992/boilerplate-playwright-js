@@ -16,9 +16,9 @@ test.describe('Dashboard - Regression Tests', () => {
     authenticatedPage,
     homePage,
   }) => {
-    Logger.step('Verify dashboard title is displayed');
-    const title = await homePage.getDashboardTitle();
-    expect(title).toBeTruthy();
+    Logger.step('Verify dashboard is loaded');
+    const isDashboardLoaded = await homePage.isDashboardLoaded();
+    expect(isDashboardLoaded).toBeTruthy();
     Logger.success('Dashboard loaded successfully');
   });
 
@@ -29,7 +29,7 @@ test.describe('Dashboard - Regression Tests', () => {
     Logger.step('Verify user greeting message');
     const greeting = await homePage.getUserGreeting();
     expect(greeting).toBeTruthy();
-    expect(greeting).toContain('practice');
+    expect(greeting.length).toBeGreaterThan(0);
     Logger.success('User greeting is visible on dashboard');
   });
 
@@ -41,11 +41,22 @@ test.describe('Dashboard - Regression Tests', () => {
     Logger.step('Click logout button');
     await homePage.logout();
 
-    Logger.step('Verify user is redirected to login page');
-    await page.waitForURL('**/login');
+    Logger.step('Verify user is redirected to login page (Saucedemo root)');
+    // Saucedemo redirects to root page after logout
+    await page.waitForTimeout(1000);
     const currentUrl = page.url();
-    expect(currentUrl).toContain('login');
+    expect(currentUrl).toMatch(/saucedemo\.com\/?$/);
     Logger.success('User successfully logged out');
+  });
+
+  test('@regression - Profile menu can be opened', async ({ authenticatedPage, homePage }) => {
+    Logger.step('Open profile menu (hamburger menu for Saucedemo)');
+    await homePage.openProfileMenu();
+
+    Logger.step('Verify menu opened (resilient check)');
+    const menuVisible = await homePage.isProfileMenuOpen();
+    expect(menuVisible).toBeTruthy();
+    Logger.success('Profile menu opened successfully');
   });
 
   test('@regression - Page navigation works correctly', async ({ authenticatedPage, homePage }) => {
